@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function App() {
+  
   const [tarefaAtual, setTarefaAtual] = useState('');
   const [listaTarefas, setListaTarefas] = useState([]);
   
+useEffect(() => {
+    
+  resgatarDadosLocal();
+}, []); 
+
   const salvarDadosLocal = async (ListaDedados) => {
    const dadosJSON = JSON.stringify(listaDeDados);
    await AsyncStorage.setItem('minhasTarefas', dadosjSON);
