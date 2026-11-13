@@ -6,19 +6,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function App() {
   const [tarefaAtual, setTarefaAtual] = useState('');
   const [listaTarefas, setListaTarefas] = useState([]);
-  const salvarTeste = async () => {
-    await AsyncStorage.setItem('chave_secreta', 'Felipe');
-    console.log('Teste salvo no cofre!');
-}
+  
+  const salvarDadosLocal = async (ListaDedados) => {
+   const dadosJSON = JSON.stringify(listaDeDados);
+   await AsyncStorage.setItem('minhasTarefas', dadosjSON);
+  }
+
+  const resgatarDadosLocal = async () => {
+    await AsyncStorage.getItem('minhas_tarefas')
+  }
 
   const handleAdicionartarefa = () => {
     if (tarefaAtual.trim() === '') 
       {
       return;
       }
-    setListaTarefas([...listaTarefas, tarefaAtual]);
+    const novaLista = [...listaTarefas, tarefaAtual];
+    setListaTarefas(novaLista);
+    salvarDadosLocal(novaLista);
     setTarefaAtual('');
-  }
+
+  };
 
 return (
   <View>
