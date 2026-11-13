@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function App() {
   const [tarefaAtual, setTarefaAtual] = useState('');
   const [listaTarefas, setListaTarefas] = useState([]);
+  const salvarTeste = async () => {
+    await AsyncStorage.setItem('chave_secreta', 'Felipe');
+    console.log('Teste salvo no cofre!');
+}
 
   const handleAdicionartarefa = () => {
     if (tarefaAtual.trim() === '') 
